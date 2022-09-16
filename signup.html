@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>RideFinder || Newsletter Signup</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/signup.css" rel="stylesheet">
+
+  </head>
+  <body class="text-center">
+
+<main class="form-signin w-100 m-auto">
+  <form action="/" method="POST" >
+    <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Sign Up to Our Newsletter!</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control top" name="firstName" placeholder="= First Name">
+      <label for="floatingInput">First</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control bottom" name="lastName" placeholder="= Last Name">
+      <label for="floatingInput">Last</label>
+    </div>
+    <div class="form-floating">
+      <input type="email" class="form-control top" name="email" placeholder="name@example.com">
+      <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control bottom" name="phone" placeholder="xxx-xxx-xxxx">
+      <label for="floatingInput">Mobile #</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-info" type="submit">Sign Me Up!</button>
+    <p class="mt-5 mb-3 text-muted">&copy; RideFinder | 2022</p>
+  </form>
+</main>
+
+
+
+
+
+
+<script>
+var x = document.getElementById ('demo');
+function getLocation () {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition (showPosition);
+  } else {
+    x.innerHTML = 'Geolocation is not supported by this browser.';
+  }
+}
+function showPosition (position) {
+  x.innerHTML =
+    'Latitude: ' +
+    position.coords.latitude +
+    '<br>Longitude: ' +
+    position.coords.longitude;
+}
+</script>
+
+
+
+
+
+  </body>
+</html>
