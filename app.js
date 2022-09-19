@@ -4,15 +4,20 @@ const bodyParser = require ('body-parser');
 const port = 3000;
 const https = require ('https');
 
+const expressLayouts = require ('express-ejs-layouts');
+const indexRouter = require ('./routes/index.js');
+app.use ('/', indexRouter);
+app.set ('view engine', 'ejs');
+app.set ('views', __dirname + '/views');
+app.set ('layout', 'layouts/layout');
+app.use (expressLayouts);
+
 app.use (express.static ('public'));
+
 app.use (bodyParser.urlencoded ({extended: true}));
 
 app.listen (process.env.PORT || port, () => {
   console.log ('Server is serving');
-});
-
-app.get ('/', (req, res) => {
-  res.sendFile (__dirname + '/signup.html');
 });
 
 app.post ('/', (req, res) => {
