@@ -1,14 +1,11 @@
-require ('dotenv').config ();
-console.log (process.env);
-
-// if (process.env.NODE_ENV !== 'production') {
-//   require ('dotenv').parse;
-// }
+//require ('dotenv').config (); //config parameters -> {path: '.env.${NODE_ENV}'}
+if (process.env.NODE_ENV === 'dev') {
+  require ('dotenv').config ();
+}
 
 const express = require ('express');
 const app = express ();
 const bodyParser = require ('body-parser');
-const port = 3000;
 const https = require ('https');
 
 const mongoose = require ('mongoose');
@@ -16,8 +13,7 @@ var options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-mongoose.connect ('mongodb://localhost:27017/RideFinder', options); //process.env.DATABASE_URL
-
+mongoose.connect (process.env.DATABASE_URL, options); //'mongodb://localhost:27017/RideFinder'
 const db = mongoose.connection;
 db.on ('error', err => console.error ('connection error;', err));
 db.once ('open', () => console.log ('Connected to Mongoose'));
@@ -34,7 +30,7 @@ app.use (express.static ('public'));
 
 app.use (bodyParser.urlencoded ({extended: true}));
 
-app.listen (process.env.PORT || port, () => {
+app.listen (process.env.PORT, () => {
   console.log ('Server is serving');
 });
 
@@ -63,7 +59,7 @@ app.post ('/', (req, res) => {
   const url = 'https://us12.api.mailchimp.com/3.0/lists/c44038d013';
   const options = {
     method: 'POST',
-    auth: 'Andersen:832b4ef64da93bba686e13c04c715ebf-us12',
+    auth: 'Andersen:' + process.env.MAILCHIMP_API,
   };
 
   var created;
