@@ -1,14 +1,32 @@
+require ('dotenv').config ();
+console.log (process.env);
+
+// if (process.env.NODE_ENV !== 'production') {
+//   require ('dotenv').parse;
+// }
+
 const express = require ('express');
 const app = express ();
 const bodyParser = require ('body-parser');
 const port = 3000;
 const https = require ('https');
 
+const mongoose = require ('mongoose');
+var options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+mongoose.connect ('mongodb://localhost:27017/RideFinder', options); //process.env.DATABASE_URL
+
+const db = mongoose.connection;
+db.on ('error', err => console.error ('connection error;', err));
+db.once ('open', () => console.log ('Connected to Mongoose'));
+
 const expressLayouts = require ('express-ejs-layouts');
 const indexRouter = require ('./routes/index.js');
 app.use ('/', indexRouter);
 app.set ('view engine', 'ejs');
-app.set ('views', __dirname + '/views');
+//app.set ('views', __dirname + '/views');
 app.set ('layout', 'layouts/layout');
 app.use (expressLayouts);
 
@@ -45,7 +63,7 @@ app.post ('/', (req, res) => {
   const url = 'https://us12.api.mailchimp.com/3.0/lists/c44038d013';
   const options = {
     method: 'POST',
-    auth: 'Andersen:b531c37fbf9bd893a4d22e8ab4bd0dd1-us12',
+    auth: 'Andersen:832b4ef64da93bba686e13c04c715ebf-us12',
   };
 
   var created;
@@ -75,7 +93,7 @@ app.post ('/', (req, res) => {
 });
 
 app.post ('/failure.html', (req, res) => {
-  res.sendFile (__dirname + '/signup.html');
+  res.sendFile (__dirname + '/views/signup.html');
 });
 // api key b531c37fbf9bd893a4d22e8ab4bd0dd1-us12
 // audience id c44038d013
